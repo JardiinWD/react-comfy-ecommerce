@@ -1,7 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
+
 const Footer = () => {
-  return <h4>footer</h4>
+  return (
+    <Wrapper>
+      {/* Copy and Date */}
+      <h5>
+        &copy; {new Date().getFullYear()}
+        <span> ComfySloth</span>
+      </h5>
+      {/* Rights */}
+      <h5> All rights reserved</h5>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.footer`

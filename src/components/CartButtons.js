@@ -7,8 +7,33 @@ import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
 
 const CartButtons = () => {
-  return <h4>cart buttons </h4>
+
+  const { closeSidebar } = useProductsContext()
+
+  return (
+    /* cart-btn-wrapper */
+    <Wrapper className="cart-btn-wrapper">
+      {/* cart-btn */}
+      <Link to='/cart' className="cart-btn" onClick={closeSidebar}>
+        Cart
+        {/* cart-container */}
+        <span className="cart-container">
+          <FaShoppingCart />
+          {/* cart-value */}
+          <span className="cart-value">
+            12
+          </span>
+        </span>
+      </Link>
+      {/* auth-btn */}
+      <button type='button' className="auth-btn">
+        Login <FaUserPlus />
+      </button>
+    </Wrapper>
+  )
 }
+
+
 
 const Wrapper = styled.div`
   display: grid;
