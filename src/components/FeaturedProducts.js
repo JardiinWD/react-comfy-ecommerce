@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useProductsContext } from '../context/products_context'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -7,7 +7,42 @@ import Loading from './Loading'
 import Product from './Product'
 
 const FeaturedProducts = () => {
-  return <h4>featured products</h4>
+
+  const {
+    products_loading: loading,
+    products_error: error,
+    featured_products: featured
+  } = useProductsContext()
+
+  // If statement for loading case
+  if (loading) return <Loading />
+  // If statement for error case
+  if (error) return <Error />
+  // If statement for error case
+  // if (featured) return <Product />
+
+
+  return (
+    /* section */
+    <Wrapper className="section">
+      {/* title */}
+      <div className="title">
+        <h2>Featured Products</h2>
+        {/* underline */}
+        <div className="underline"></div>
+      </div>
+      {/* section-center featured */}
+      <div className="section-center featured">
+        {
+          featured.slice(0, 3).map(item => {
+            return (
+              <Product key={item.id} {...item} />
+            )
+          })
+        }
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`

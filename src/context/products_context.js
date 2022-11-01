@@ -15,7 +15,11 @@ import {
 } from '../actions'
 
 const initialState = {
-  isSidebarOpen: false
+  isSidebarOpen: false, // Initial state of isSidebarOpen as a boolean value
+  products_loading: false, // Initial state of products_loading as a boolean value
+  products_error: false, // Initial state of products_error as a boolean value
+  products: [], // Initial state of products as an empty array
+  featured_products: [] // Initial state of featured_products as an empty array
 }
 
 const ProductsContext = React.createContext()
@@ -32,6 +36,29 @@ export const ProductsProvider = ({ children }) => {
   const closeSidebar = () => {
     dispatch({ type: SIDEBAR_CLOSE })
   }
+
+  // Fetching products fn
+  const fetchProducts = async (url) => {
+    // I invoke useReducer dispatch fn with the action.type "GET_PRODUCTS_BEGIN"
+    dispatch({ type: GET_PRODUCTS_BEGIN })
+    // I invoke try/catch js fn for the response of my API
+    try {
+      // I save axios' await response in a variable
+      const response = await axios.get(url)
+      // I saved my response.data in another variable
+      const products = response.data
+      console.log(products); // Look the response in console
+      dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products })
+    }
+    catch (error) {
+      dispatch({ type: GET_PRODUCTS_ERROR })
+    }
+  }
+
+  useEffect(() => {
+    // I invoke fetchProducts fn in useEffect hook
+    fetchProducts(url)
+  }, [])
 
   return (
     <ProductsContext.Provider value={{ ...state, openSidebar, closeSidebar }}>
