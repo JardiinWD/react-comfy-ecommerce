@@ -10,6 +10,36 @@ const AddToCart = ({ product }) => {
   const { id, stock, colors } = product
   // useState method for colors (initial state colors at index 0)
   const [mainColor, setMainColor] = useState(colors[0])
+  // useState method for the amount
+  const [amount, setAmount] = useState(1)
+
+  // Increase amount fn
+  const increaseHandler = (e) => {
+    // Preventing refresh
+    e.preventDefault()
+    // Change the current state of the amount
+    setAmount((oldAmount) => {
+      // Increase by one
+      let tempAmount = oldAmount + 1
+      // Check if the total amount is equal or higher than the stock
+      if (tempAmount > stock) tempAmount = stock
+      return tempAmount
+    })
+  }
+
+  // Decrease amount fn
+  const decreaseHandler = (e) => {
+    // Preventing refresh
+    e.preventDefault()
+    // Change the current state of the amount
+    setAmount((oldAmount) => {
+      // Increase by one
+      let tempAmount = oldAmount - 1
+      // Check if the total amount is equal or less than 0
+      if (tempAmount < 1) tempAmount = 1
+      return tempAmount
+    })
+  }
 
 
   return (
@@ -17,6 +47,7 @@ const AddToCart = ({ product }) => {
       {/* colors */}
       <div className="colors">
         <span> colors : </span>
+        {/* Colors available */}
         <div>
           {
             colors.map((color, index) => {
@@ -31,7 +62,10 @@ const AddToCart = ({ product }) => {
       </div>
       {/* btn-container */}
       <div className="btn-container">
-
+        {/* AmountButtons component */}
+        <AmountButtons amount={amount} increase={increaseHandler} decrease={decreaseHandler} />
+        {/* Link to Cart */}
+        <Link to="/cart" className="btn text-center">Add to Cart</Link>
       </div>
     </Wrapper>
   )

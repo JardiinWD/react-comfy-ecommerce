@@ -2,9 +2,55 @@ import React from 'react'
 import { useFilterContext } from '../context/filter_context'
 import { BsFillGridFill, BsList } from 'react-icons/bs'
 import styled from 'styled-components'
+
 const Sort = () => {
-  return <h4>sort </h4>
+  /* Destructuring of filter Context */
+  const {
+    filtered_products: products,
+    grid_view,
+    setGridView,
+    setListView,
+    sort,
+    updateSort
+  } = useFilterContext()
+
+  return (
+    <Wrapper>
+      {/* btn-container */}
+      <div className="btn-container">
+        {/* BsFillGridFill */}
+        <button type='button' className={`${grid_view ? 'active' : null}`} onClick={setGridView}>
+          <BsFillGridFill />
+        </button>
+        {/* BsList */}
+        <button type='button' className={`${!grid_view ? 'active' : null}`} onClick={setListView}>
+          <BsList />
+        </button>
+      </div>
+      {/* products found */}
+      <p>{products.length} products found</p>
+      <hr />
+      <form >
+        {/* sort */}
+        <label htmlFor="sort">Sort by</label>
+        {/* sort-input */}
+        <select name='sort' id='sort' className="sort-input" value={sort} onChange={updateSort}>
+          {/* price-lowest */}
+          <option value="price-lowest">price (lowest)</option>
+          {/* price-highest */}
+          <option value="price-highest">price (highest)</option>
+          {/* name-a */}
+          <option value="name-a">name (a-z)</option>
+          {/* name-z */}
+          <option value="name-z">name (z-a)</option>
+        </select>
+      </form>
+    </Wrapper>
+  )
 }
+
+
+
 
 const Wrapper = styled.section`
   display: grid;
