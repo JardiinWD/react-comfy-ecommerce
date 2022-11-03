@@ -7,11 +7,10 @@ import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
 
 const CartButtons = () => {
-
+  // Destructuring of products context
   const { closeSidebar } = useProductsContext()
+  // Destructuring of cart context
   const { total_items } = useCartContext()
-
-
 
   return (
     /* cart-btn-wrapper */
