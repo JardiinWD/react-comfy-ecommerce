@@ -11,6 +11,8 @@ import { useUserContext } from '../context/user_context'
 const Nav = () => {
   // Destructuring of useProduct Context
   const { openSidebar } = useProductsContext()
+  // Destructuring of useUser Context
+  const { myUser } = useUserContext()
 
   return (
     <NavContainer>
@@ -43,6 +45,15 @@ const Nav = () => {
                 </li>
               )
             })
+          }
+          {
+            myUser && (
+              <li>
+                <Link to="/checkout">
+                  Checkout
+                </Link>
+              </li>
+            )
           }
         </ul>
         {/* CartButtons */}

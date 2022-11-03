@@ -4,6 +4,7 @@ import { Navbar, Sidebar, Footer } from './components'
 import styled from 'styled-components'
 // Import of all pages from Index
 import { About, Cart, Checkout, Error, Home, Products, SingleProduct, Private } from './pages/index'
+import PrivateRoute from './pages/PrivateRoute'
 
 
 function App() {
@@ -35,9 +36,9 @@ function App() {
         {/* SingleProduct */}
         <Route exact path='/products/:id' children={<SingleProduct />} />
         {/* Checkout */}
-        <Route exact path='/checkout'>
+        <PrivateRoute exact path='/checkout'>
           <Checkout />
-        </Route>
+        </PrivateRoute>
         {/* Error Page */}
         <Route path='*'>
           <Error />
