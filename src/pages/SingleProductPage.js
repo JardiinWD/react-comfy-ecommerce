@@ -14,9 +14,6 @@ import {
   PageHero,
 } from '../components'
 
-
-
-
 const SingleProductPage = () => {
 
   // I set an ID with useParams

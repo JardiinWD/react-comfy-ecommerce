@@ -25,7 +25,6 @@ const Filters = () => {
   const colors = getUniqueValues(all_products, 'colors')
 
 
-
   return (
     <Wrapper>
       <div className="content">
@@ -127,7 +126,7 @@ const Filters = () => {
               type="checkbox"
               name='shipping'
               id='shipping'
-              onClick={updateFilters}
+              onChange={updateFilters}
               checked={shipping} />
           </div>
         </form>

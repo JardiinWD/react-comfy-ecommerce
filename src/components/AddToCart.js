@@ -6,6 +6,10 @@ import { useCartContext } from '../context/cart_context'
 import AmountButtons from './AmountButtons'
 
 const AddToCart = ({ product }) => {
+
+  // Destructuring of cart Context, I've tooken the addtocart method
+  const { addToCart } = useCartContext()
+
   // Destructuring of Product
   const { id, stock, colors } = product
   // useState method for colors (initial state colors at index 0)
@@ -65,7 +69,7 @@ const AddToCart = ({ product }) => {
         {/* AmountButtons component */}
         <AmountButtons amount={amount} increase={increaseHandler} decrease={decreaseHandler} />
         {/* Link to Cart */}
-        <Link to="/cart" className="btn text-center">Add to Cart</Link>
+        <Link to="/cart" className="btn text-center" onClick={() => addToCart(id, mainColor, amount, product)}>Add to Cart</Link>
       </div>
     </Wrapper>
   )
